@@ -12,7 +12,9 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             if let Some(window) = app.get_webview_window("main") {
-                window.maximize().unwrap();
+                // window.maximize().unwrap();
+                window.hide().unwrap();
+                window.show().unwrap();
             }
             Ok(())
         })
