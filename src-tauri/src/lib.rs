@@ -10,6 +10,12 @@ pub fn run() {
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_opener::init())
+        .setup(|app| {
+            if let Some(window) = app.get_webview_window("main") {
+                window.maximize().unwrap();
+            }
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![greet, proxy_request])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
